@@ -8,23 +8,23 @@
     <meta name="viewport" content="width=1100" />
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" /> 
     
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/themes/nsc/css/style.css" rel="stylesheet" />
     
-    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
-    <script type="text/javascript" src="js/jquery.maphilight.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="/themes/nsc/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/themes/nsc/js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/themes/nsc/js/jquery.maphilight.js"></script>
+    <script type="text/javascript" src="/themes/nsc/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/themes/nsc/js/script.js"></script>
     
     <!--[if IE 8]> 
         <link href="css/styles_ie8.css" rel="stylesheet" />
     <![endif]-->
 </head>
 <body>
-    <a href="#" title="" class="write_us_link"></a>
+    <!--a href="#" title="" class="write_us_link"></a-->
     <div class="main_wrap">
-        <div class="header">
-            <div class="header_contacts">
+        <div class="header" style="height: 20px; border: none">
+            <!--div class="header_contacts">
                 <p class="phone">+7 (812) 313-69-82</p>
                 <p class="header_contactme"><a href="#" title="">Запрос звонка</a></p>
             </div>
@@ -34,11 +34,10 @@
                 <li><a href="#" title="">Новости</a></li>
                 <li><a href="#" title="">Компания</a></li>
                 <li><a href="#" title="">Контакты</a></li>
-            </ul>
+            </ul-->
         </div>
         <div class="content">
-            
-            <div class="gallery_main">
+            <!--div class="gallery_main">
                 <div class="jcarousel">
                     <ul>
                         <li>
@@ -74,9 +73,9 @@
                 <a href="#" class="jcarousel-control-next"></a>
                 
                 <p class="jcarousel-pagination"></p>
-            </div>
+            </div-->
             
-            <div class="project_box">
+            <!--div class="project_box">
                 <div class="footer_socials">
                     <i class="icon-social_fb"></i>
                     <i class="icon-social_tw"></i>
@@ -99,7 +98,7 @@
                     <li><a href="#documentation" title="">Документация </a></li>
                     <li><a href="#options" title="">Варианты оплаты</a></li>
                 </ul>
-            </div>
+            </div-->
             <div class="tabs_content">
                 <div id="plans" style="display: block;">
                     <div class="korpus">
@@ -138,12 +137,12 @@
                                         <area  alt="" title="" href="javascript:void(0)" shape="poly" coords="312,112,313,189,345,189,351,205,382,197,380,188,381,168,417,169,417,114" style="outline:none;" target="_self"     data-maphilight='{"strokeColor":"fed869", "fillColor":"f0b917","alwaysOn":true}'  
                                         data-placement="top" data-content="Квартира номер 5"   data-container="div.map_container"  class="popover_style position_5" />
                                     </map>
-                                    <div class="expl_colors">
+                                    <!--div class="expl_colors">
                                         <p><i class="one_room"></i>Однокомнатные квартиры </p>
                                         <p><i class="two_room"></i>Двухкомнатные квартиры </p>
                                         <p><i class="three_room"></i>Трехкомнатные квартиры </p>
                                         <p><i class="zero_room"></i>Квартиры студии </p>
-                                    </div>
+                                    </div-->
                                 </div>
                             </div>
                             <div class="tabs_floors">
@@ -314,15 +313,16 @@
                         
                     </div>
                 </div>
-                <div id="actions"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
+                <!--div id="actions"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
                 <div id="progress"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
                 <div id="placement"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
                 <div id="documentation"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
-                <div id="options"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div>
+                <div id="options"><p>Функции Генерального подрядчика: ООО «Вертикаль».</p></div-->
             </div>
             
         </div>
-        <div class="footer">
+        <br><br><br><br><br><br>
+        <!--div class="footer">
             <div class="ov_hidden text-center">
                 <ul class="footer_menu">
                     <li><a href="#" title="">Компании группы </a></li>
@@ -340,6 +340,6 @@
                     <p>+7 (812) 313-69-82    <a href="#" title="">sale@nevscom.ru</a></p>
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
 </body>
