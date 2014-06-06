@@ -35,14 +35,7 @@
 		<?if(isset($menu)):?>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li <? if ($main_menu == 'content') echo 'class="active"';?> ><a href="/admin/content">Наполнение</a></li>
-				<li <? if ($main_menu == 'menu') echo 'class="active"';?> ><a href="/admin/menu">Меню</a></li>
-				<li <? if ($main_menu == 'files') echo 'class="active"';?>><a href="/admin/files">Файлы</a></li>
-				<li class="dropdown <?  if ($main_menu[0] == 'modules') echo 'active';?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Все модули <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li  <? if ($main_menu[1] == 'counters') echo 'class="active"';?>><a href="/admin/counters">Счетчики</a></li>
-					</ul>
-				</li>
+				<li class="active"><a href="">Управление планировками</a></li>
 			</ul>
 			<!--ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-trash"></span> Корзина</a></li>
