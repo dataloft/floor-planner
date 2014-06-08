@@ -10,6 +10,9 @@
 <link href="/themes/airyo/css/bootstrap.min.css" rel="stylesheet">
 <link href="/themes/airyo/css/bootstrap-airyo.css" rel="stylesheet">
 
+
+<link type="text/css" rel="stylesheet" href="/themes/nsc/area_draw/css/styles.css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -35,7 +38,7 @@
 		<?if(isset($menu)):?>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="">Управление планировками</a></li>
+				<li class="active"><a href="/admin/">Управление планировками</a></li>
 			</ul>
 			<!--ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-trash"></span> Корзина</a></li>
