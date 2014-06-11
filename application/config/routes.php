@@ -50,10 +50,10 @@ $route['admin/login'] = 'admin/auth/login';
 $route['admin/registration'] = 'admin/auth/create_user';
 $route['admin/logout'] = 'admin/auth/logout';
 
-$route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
-
+//admin layout
 $route['admin/blocks'] = 'admin/blocks/index';
 $route['admin/blocks/addblock'] = 'admin/blocks/addblock';
+$route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
 
 //admin content
 $route['admin/content'] = 'admin/content';
