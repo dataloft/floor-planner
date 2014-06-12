@@ -9,12 +9,12 @@
 				<a class="btn btn-default" href="#" data-toggle="modal" data-target="#title-block-modal">Добавить корпус</a>
 			</div>
 			<div class="col-md-3 col-md-pull-9" style="margin-bottom: 10px">
-				<select class="form-control" name="object_id">
+				<select class="form-control" name="object_id"  onchange="this.form.submit();">
 <?
 foreach ($objects_list as $object)
 {
 ?>
-    				<option value="<?=$object['id']?>"><?=$object['title_object']?></option>
+    				<option value="<?=$object['id']?>" <?=($object['id'] == $object_id)?'selected':''?>><?=$object['title_object']?></option>
 <?
 }
 ?>
@@ -37,68 +37,57 @@ foreach ($objects_list as $object)
 	        </div>
         </form>
 	</div>
-    <div class="row">
-	    <div class="col-md-12">
-	    	<h3 class="pull-left">Корпус 1</h3>
-			<ul class="nav nav-pills pull-right">
-			  <li>
-			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			      <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить этаж
-			    </a>
-			  </li>
-			  <li>
-			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			      <span class="glyphicon glyphicon-list" style="color: #777"></span>&nbsp;&nbsp;Список квартир
-			    </a>
-			  </li>
-			</ul>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<ul class="list-group" id="blocks-list">
-<?
-if (!empty($blocks_list))
-foreach ($blocks_list as $block)
-{
-?>
-    			<li id="block-<?=$block['id']?>" class="list-group-item"><a href=""><?=$block['numb_block']?></a></li>
-<?
-}
-?>
-            </ul>
-		</div>
-	</div>
-	    <div class="row">
-	    <div class="col-md-12">
-	    	<h3 class="pull-left">Корпус 2</h3>
-			<ul class="nav nav-pills pull-right">
-			  <li>
-			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			      <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить этаж
-			    </a>
-			  </li>
-			  <li>
-			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			      <span class="glyphicon glyphicon-list" style="color: #777"></span>&nbsp;&nbsp;Список квартир
-			    </a>
-			  </li>
-			</ul>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<ul class="list-group" id="blocks-list">
-<?
-if (!empty($blocks_list))
-foreach ($blocks_list as $block)
-{
-?>
-    			<li id="block-<?=$block['id']?>" class="list-group-item"><a href=""><?=$block['numb_block']?></a></li>
-<?
-}
-?>
-            </ul>
-		</div>
-	</div>
+    <div id="blocks-list">
+        <?
+        if (!empty($blocks_list))
+            foreach ($blocks_list as $block)
+            {
+                ?>
+                <div  id="block-<?=$block['id']?>">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="pull-left"><?=$block['numb_block']?></h3>
+                            <ul class="nav nav-pills pull-right">
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="addFloor('<?=$block['id']?>')">
+                                        <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить этаж
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-list" style="color: #777"></span>&nbsp;&nbsp;Список квартир
+                                    </a>
+                                </li>
+                                <? if (empty($block['floors'])) {?>
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="delBlock('<?=$block['id']?>')" >
+                                     Удалить
+                                    </a>
+                                </li>
+                                <? } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-group" id="floors-list">
+                                <?
+                                if (!empty($block['floors']))
+                                {
+                                    foreach ($block['floors'] as $floor)
+                                    {
+                                        ?>
+                                        <li id="floor-<?=$floor['id']?>" class="list-group-item"><a href=""><?=$floor['numb_floor']?></a><? if (empty($floor['plan'])) {?><a href="#" onclick="delFloor(<?=$floor['id']?>)">Удалить</a><?}?></li>
+                                    <?
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?
+            }
+            ?>
+    </div>
 </div>

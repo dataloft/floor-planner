@@ -53,6 +53,9 @@ $route['admin/logout'] = 'admin/auth/logout';
 //admin layout
 $route['admin/blocks'] = 'admin/blocks/index';
 $route['admin/blocks/addblock'] = 'admin/blocks/addblock';
+$route['admin/blocks/delblock'] = 'admin/blocks/delblock';
+$route['admin/floor/addfloor'] = 'admin/floor/addfloor';
+$route['admin/floor/delfloor'] = 'admin/floor/delfloor';
 $route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
 
 //admin content

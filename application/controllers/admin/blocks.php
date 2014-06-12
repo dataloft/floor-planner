@@ -9,6 +9,7 @@ class Blocks extends CI_Controller {
         $this->load->helper('url');
         $this->load->model('blocks_model');
         $this->load->model('objects_model');
+        $this->load->model('floors_model');
         $this->load->helper('language');
     }
 
@@ -21,10 +22,18 @@ class Blocks extends CI_Controller {
         $data['usermenu'] = array();
 
         $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
-
-
         $data['objects_list'] = $this->objects_model->getObjects();
-        $data['blocks_list'] = $this->blocks_model->getBlocks();
+        if (!empty($_POST['object_id']))
+            $data['object_id'] = $_POST['object_id'];
+        else
+            $data['object_id'] = $data['objects_list'][0]['id'];
+
+        $data['blocks_list'] = $this->blocks_model->getBlocks($data['object_id']);
+        //print_r($data['blocks_list']);
+        foreach ($data['blocks_list'] as $i => $block)
+        {
+            $data['blocks_list'][$i]['floors'] = $this->floors_model->getFloors($block['id']);
+        }
         $this->load->view('admin/header', $data);
         $this->load->view('admin/blocks/index', $data);
         $this->load->view('admin/footer', $data);
@@ -51,6 +60,22 @@ class Blocks extends CI_Controller {
         echo json_encode($output);
     }
 
+    public function delBlock()
+    {
+
+        if (!empty($_POST['block_id']) and $this->blocks_model->delete($_POST['block_id']))
+        {
+
+
+            $output["success"] = "ok";
+        }
+        else
+        {
+            $output["error"] = "error";
+        }
+
+        echo json_encode($output);
+    }
 }
 
 /* End of file page.php */

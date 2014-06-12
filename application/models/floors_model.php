@@ -1,21 +1,21 @@
 <?php
-class Blocks_model extends CI_Model {
+class Floors_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
 	}
 
-    public function getBlocks($object_id = false) {
+    public function getFloors($block_id = false) {
         $this->db->select('*');
-        if (!empty($object_id))
-            $this->db->where('object_id',$object_id);
-        $q =  $this->db->get('_blocks');
+        if (!empty($block_id))
+            $this->db->where('block_id',$block_id);
+        $q =  $this->db->get('_floors');
         return  $q->result_array();
     }
 
-    public function addBlock ($data)
+    public function addFloor ($data)
     {
-        $this->db->insert('_blocks', $data);
+        $this->db->insert('_floors', $data);
         $return = $this->db->insert_id();
 
         return $return;
@@ -23,7 +23,7 @@ class Blocks_model extends CI_Model {
 
     public function delete ($id)
     {
-        if ($this->db->delete('_blocks', array('id' => $id)))
+        if ($this->db->delete('_floors', array('id' => $id)))
             //$return = $this->db->affected_rows() == 1;
             return true;
         else
