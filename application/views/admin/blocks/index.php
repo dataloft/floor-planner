@@ -77,7 +77,7 @@ foreach ($objects_list as $object)
                                     foreach ($block['floors'] as $floor)
                                     {
                                         ?>
-                                        <li id="floor-<?=$floor['id']?>" class="list-group-item"><a href=""><?=$floor['numb_floor']?></a><? if (empty($floor['plan'])) {?><a href="#" onclick="delFloor(<?=$floor['id']?>)">Удалить</a><?}?></li>
+                                        <li id="floor-<?=$floor['id']?>" class="list-group-item"><a href="/admin/floor/<?=$floor['numb_floor']?>">Этаж <?=$floor['numb_floor']?></a><? if (empty($floor['plan'])) {?><a class="pull-right" href="#" onclick="delFloor(<?=$floor['id']?>)">Удалить</a><?}?></li>
                                     <?
                                     }
                                 }
