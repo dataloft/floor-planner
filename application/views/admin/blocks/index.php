@@ -59,7 +59,7 @@ foreach ($objects_list as $object)
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a class="dropdown-toggle" href="/admin/flats/?block_id=<?=$block['id']?>">
                                         <span class="glyphicon glyphicon-list" style="color: #777"></span>&nbsp;&nbsp;Список квартир
                                     </a>
                                 </li>

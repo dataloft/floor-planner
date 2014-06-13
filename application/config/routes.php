@@ -57,6 +57,9 @@ $route['admin/blocks/delblock'] = 'admin/blocks/delblock';
 $route['admin/floor/addfloor'] = 'admin/floor/addfloor';
 $route['admin/floor/delfloor'] = 'admin/floor/delfloor';
 $route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
+$route['admin/flats'] = 'admin/flats/index';
+$route['admin/flats/index'] = 'admin/flats/index';
+$route['admin/flats/addflat'] = 'admin/flats/addflat';
 
 //admin content
 $route['admin/content'] = 'admin/content';
