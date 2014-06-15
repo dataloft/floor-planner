@@ -60,6 +60,7 @@ $route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
 $route['admin/flats'] = 'admin/flats/index';
 $route['admin/flats/index'] = 'admin/flats/index';
 $route['admin/flats/addflat'] = 'admin/flats/addflat';
+$route['admin/flats/(:num)'] = 'admin/flats/edit/$1';
 
 //admin content
 $route['admin/content'] = 'admin/content';

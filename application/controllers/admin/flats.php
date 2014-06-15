@@ -170,7 +170,7 @@ class Flats extends CI_Controller {
         
         
         $this->load->view('admin/header', @$data);
-        $this->load->view('admin/layout/floor', @$data);
+        $this->load->view('admin/flats/edit', @$data);
         $this->load->view('admin/footer', @$data);
     }
 
