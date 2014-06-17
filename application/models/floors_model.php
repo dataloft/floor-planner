@@ -13,6 +13,14 @@ class Floors_model extends CI_Model {
         return  $q->result_array();
     }
 
+    public function getFloor($id) {
+        $this->db->select('*');
+        if (!empty($id))
+            $this->db->where('id',$id);
+        $q =  $this->db->get('_floors');
+        return  $q->row();
+    }
+
     public function addFloor ($data)
     {
         $this->db->insert('_floors', $data);
@@ -28,6 +36,39 @@ class Floors_model extends CI_Model {
             return true;
         else
             return false;
+    }
+
+    public function delCheckedFlat ($id)
+    {
+        if ($this->db->delete('checked_flats', array('id' => $id)))
+           return true;
+        else
+            return false;
+    }
+
+    public function update ($plan, $id)
+    {
+        $this->db->set('plan', $plan);
+        $this->db->where('id', $id);
+        if ($this->db->update('_floors'))
+            return true;
+        else
+            return false;
+    }
+
+    public function getCheckedFlats ($id)
+    {
+        $this->db->select('*');
+        $this->db->where('floor_id',$id);
+        $q =  $this->db->get('checked_flats');
+        return  $q->result_array();
+    }
+
+    public function checkFlat ($data)
+    {
+        $this->db->insert('checked_flats', $data);
+        $return = $this->db->insert_id();
+        return $return;
     }
 }
 
