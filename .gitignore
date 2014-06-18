@@ -17,3 +17,5 @@ application/logs/*
 /.idea
 /.htaccess
 /application/config/database.php
+
+/public/*
