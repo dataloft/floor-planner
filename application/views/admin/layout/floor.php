@@ -57,27 +57,29 @@ if (empty($floor->plan)){
                 </form>
             <?}?>
 		</ul>
-
-
 	</div>
 </div>
-        <div id="save-block" class="hidden">
-            После того как отметите квартиру на плане этажа, введите ее номер и сохраните отметку
-            <form action="/admin/floor/markflat" name="checkfloor-form" method="post" class="form-inline" style="margin-top: 20px">
-                <div class="form-group">
-                    <input type="text" name="numb_flat" id="check_numb_flat" class="form-control" id="exampleInputEmail1" value="" placeholder="Введите номер квартиры" >
-                    <input type="hidden" name="floor_id" value="<?=$floor->id?>">
-                    <div  class="hidden">
-                        <textarea  rows=3  name="coords"  class="canvas-area" placeholder="Shape Coordinates" data-image-id="#" data-image-url="<?=$floor->plan?>"></textarea>
-                    </div>
+
+<div class="row">
+<div class="col-md-12">
+
+    <div id="save-block" class="hidden" style="margin-bottom: 30px">
+        Отредактируйте и сохраните отметку квартиры
+        <form action="/admin/floor/markflat" name="checkfloor-form" method="post" class="form-inline" style="margin-top: 20px">
+            <div class="form-group">
+                <input type="text" name="numb_flat" id="check_numb_flat" class="form-control" id="exampleInputEmail1" value="" placeholder="Введите номер квартиры" >
+                <input type="hidden" name="floor_id" value="<?=$floor->id?>">
+                <div  class="hidden">
+                    <textarea  rows=3  name="coords"  class="canvas-area" placeholder="Shape Coordinates" data-image-id="#" data-image-url="<?=$floor->plan?>"></textarea>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-success">Сохранить</button>
-                <button type="button" id="clear-area" class="btn btn-default" >Очистить</button>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="button" id="clear-area" class="btn btn-default">Отменить</button>
+        </form>
+    </div>
 
-    <div class="row preview" >
+    <div class="row preview">
         <div id="canvas-area" class="inner">
          </div>
         <div class="plan">
@@ -92,10 +94,11 @@ if (empty($floor->plan)){
 
     </map>
 </div>
+</div>
 
 <?
-    if (!empty($checked_flats))
-   {
+if (!empty($checked_flats))
+{
 ?>
         <div class="row">
             <div class="col-md-12">
@@ -107,7 +110,7 @@ if (empty($floor->plan)){
                </ul>
             </div>
         </div>
-   <?}?>
+<?}?>
 <?
 }
 ?>

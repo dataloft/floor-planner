@@ -19,14 +19,15 @@ foreach ($flats_list as $flat)
 		</div>
 	</div>
     <div class="row">
-        <form action="/admin/flats/addflat?block_id=<?=$_GET['block_id']?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="file" name="csv-flat" size="20" />
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-success" value="Загрузить" name="upload">
-        </div>
-        </form>
-
+    	<div class="col-md-12">
+	        <form action="/admin/flats/addflat?block_id=<?=$_GET['block_id']?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	        <div class="form-group">
+	            <input type="file" name="csv-flat" size="20" />
+	        </div>
+	        <div class="form-group">
+	            <input type="submit" class="btn btn-success" value="Загрузить" name="upload">
+	        </div>
+	        </form>
+	    </div>
     </div>
 </div>
