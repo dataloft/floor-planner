@@ -59,8 +59,8 @@ $route['admin/floor/addfloor'] = 'admin/floor/addfloor';
 $route['admin/floor/delfloor'] = 'admin/floor/delfloor';
 $route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
 $route['admin/floor/delplan'] = 'admin/floor/delplan';
-$route['admin/floor/checkflat'] = 'admin/floor/checkflat';
-$route['admin/floor/delcheckedflat'] = 'admin/floor/delcheckedflat';
+$route['admin/floor/markflat'] = 'admin/floor/markflat';
+$route['admin/floor/delmarkedflat'] = 'admin/floor/delmarkedflat';
 
 $route['admin/flats'] = 'admin/flats/index';
 

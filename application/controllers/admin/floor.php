@@ -95,7 +95,7 @@ class Floor extends CI_Controller {
         $data['type'] = '';
         $data['search'] = '';
         $data['floor'] = $this->floors_model->getFloor($id);
-        $data['checked_flats'] = $this->floors_model->getCheckedFlats($id);
+        $data['checked_flats'] = $this->floors_model->getMarkedFlats($id);
         $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
         if (!empty($_POST['upload-plan']) && !empty($_FILES))
         {
@@ -184,7 +184,7 @@ class Floor extends CI_Controller {
         return false;
     }
 
-    public function checkFlat()
+    public function markFlat()
     {
 
             $this->form_validation->set_rules('coords', '', 'required');
@@ -197,7 +197,12 @@ class Floor extends CI_Controller {
                     'numb_flat' => $this->input->post('numb_flat'),
                     'floor_id' => $this->input->post('floor_id')
                 );
-                if ($this->floors_model->checkFlat($data))
+                $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
+                if (empty($mark))
+                    $res = $this->floors_model->markFlat($data);
+                else
+                    $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                if ($res)
                 {
                     $this->session->set_flashdata('message',  array(
                             'type' => 'success',
@@ -252,10 +257,10 @@ class Floor extends CI_Controller {
         echo json_encode($output);
     }
 
-    public function delCheckedFlat()
+    public function delmarkedFlat()
     {
         if (!empty($_GET['id'])){
-            $this->floors_model->delCheckedFlat($_GET['id']);
+            $this->floors_model->delmarkedFlat($_GET['id']);
             $output["success"] = "ok";
             $this->session->set_flashdata('message',  array(
                     'type' => 'success',

@@ -38,7 +38,7 @@ class Floors_model extends CI_Model {
             return false;
     }
 
-    public function delCheckedFlat ($id)
+    public function delMarkedFlat ($id)
     {
         if ($this->db->delete('checked_flats', array('id' => $id)))
            return true;
@@ -56,15 +56,27 @@ class Floors_model extends CI_Model {
             return false;
     }
 
-    public function getCheckedFlats ($id)
+    public function updateMarkFlat ($data, $id)
+    {
+
+        $this->db->where('id', $id);
+        if ($this->db->update('checked_flats',$data))
+            return true;
+        else
+            return false;
+    }
+
+    public function getMarkedFlats ($id,$numb_flat = false)
     {
         $this->db->select('*');
         $this->db->where('floor_id',$id);
+        if ($numb_flat)
+            $this->db->where('numb_flat',$numb_flat);
         $q =  $this->db->get('checked_flats');
         return  $q->result_array();
     }
 
-    public function checkFlat ($data)
+    public function markFlat ($data)
     {
         $this->db->insert('checked_flats', $data);
         $return = $this->db->insert_id();

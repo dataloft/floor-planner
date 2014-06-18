@@ -27,7 +27,7 @@ if (empty($floor->plan)){
 	<div class="col-md-12">
 		<ul class="nav nav-pills pull-right">
 			<li>
-				<a class="dropdown-toggle" id="add-area"  href="#" >
+				<a class="dropdown-toggle" id="add-area"   href="#" >
 					<span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Отметить квартиру
 				</a>
 			</li>
@@ -63,9 +63,9 @@ if (empty($floor->plan)){
 </div>
         <div id="save-block" class="hidden">
             После того как отметите квартиру на плане этажа, введите ее номер и сохраните отметку
-            <form action="/admin/floor/checkflat" name="checkfloor-form" method="post" class="form-inline" style="margin-top: 20px">
+            <form action="/admin/floor/markflat" name="checkfloor-form" method="post" class="form-inline" style="margin-top: 20px">
                 <div class="form-group">
-                    <input type="text" name="numb_flat" class="form-control" id="exampleInputEmail1" value="" placeholder="Введите номер квартиры" >
+                    <input type="text" name="numb_flat" id="check_numb_flat" class="form-control" id="exampleInputEmail1" value="" placeholder="Введите номер квартиры" >
                     <input type="hidden" name="floor_id" value="<?=$floor->id?>">
                     <div  class="hidden">
                         <textarea  rows=3  name="coords"  class="canvas-area" placeholder="Shape Coordinates" data-image-id="#" data-image-url="<?=$floor->plan?>"></textarea>
@@ -87,7 +87,7 @@ if (empty($floor->plan)){
 
     <map name="nav">
         <? if (!empty($checked_flats)) foreach ($checked_flats as $flat) {?>
-        <area shape="poly" coords="<?=$flat['coords']?>" data-maphilight='{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}' >
+        <area id="area-<?=$flat['id']?>" data-toggle="tooltip" data-placement="top" shape="poly" coords="<?=$flat['coords']?>" title="<?=$flat['numb_flat']?>"  data-maphilight='{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}'>
         <?}?>
 
     </map>
@@ -102,7 +102,7 @@ if (empty($floor->plan)){
                 <h3>Список отмеченных квартир этажа</h3>
                 <ul class="list-group" id="floors-list">
                     <? foreach ($checked_flats as $flat) {?>
-                    <li id="floor-<?=$flat['numb_flat']?>" class="list-group-item"><a href="///1"><?=$flat['numb_flat']?></a><a class="pull-right" href="/admin/floor/delcheckedflat?id=<?=$flat['id']?>" >Удалить</a></li>
+                    <li id="floor-<?=$flat['numb_flat']?>" class="list-group-item"><a onclick="editarea(<?=$flat['id']?>)" href="#"><?=$flat['numb_flat']?></a><a class="pull-right" href="/admin/floor/delmarkedflat?id=<?=$flat['id']?>" >Удалить</a></li>
                     <?}?>
                </ul>
             </div>
