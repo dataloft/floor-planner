@@ -4,8 +4,7 @@
     
     
 	<ol class="breadcrumb">
-		<li><a href="/admin/">Брусничное</a></li>
-		<li><a href="/admin/">Корпус 1</a></li>
+		<li><a href="/admin/">Брусничное, корпус 1</a></li>
 		<li><a href="/admin/">Квартиры</a></li>
 		<li>Квартира 22</li>
 	</ol>
@@ -116,7 +115,7 @@
 		
 		<div class="col-md-12">
 			<button type="submit" class="btn btn-success" style="float: left;">Сохранить</button>
-			<button type="submit" class="btn btn-warning btn-sm" style="float: right;" id="" onclick="trash('');">Удалить</button>
+			<!--button type="submit" class="btn btn-warning btn-sm" style="float: right;" id="" onclick="trash('');">Удалить</button-->
 		</div>
 		
 	</div>

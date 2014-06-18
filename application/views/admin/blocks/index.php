@@ -2,7 +2,7 @@
     <? if (isset($message['type'])) {?>
 	<div class="alert alert-<?=$message['type']?>"> <a class="close" data-dismiss="alert" href="#">&times;</a> <? if ($message['type']=='success') {?><span class="glyphicon glyphicon-ok"></span><?}?> <?=$message['text']?></div>
 	<? } ?>
-	<h1 class="page-header">Объекты</h1>
+	<h1 class="page-header">Объекты, корпуса, этажи</h1>
 	<div class="row">
         <form id="addblock-form" action="/admin/blocks/addblock" method="post">
         <div class="col-md-9 col-md-push-3" style="margin-bottom: 10px">

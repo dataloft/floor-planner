@@ -2,7 +2,12 @@
     <? if (isset($message['type'])) {?>
         <div class="alert alert-<?=$message['type']?>"> <a class="close" data-dismiss="alert" href="#">&times;</a> <? if ($message['type']=='success') {?><span class="glyphicon glyphicon-ok"></span><?}?> <?=$message['text']?></div>
     <? } ?>
-<h1 class="page-header">Брусничное<small> / корпус 1 - 1 этаж</small></h1>
+<h1 class="page-header">Схема этажа, квартирография</h1>
+
+	<ol class="breadcrumb">
+		<li><a href="/admin/">Брусничное, корпус 1</a></li>
+		<li>Этаж 1</li>
+	</ol>
 
 
 <?
