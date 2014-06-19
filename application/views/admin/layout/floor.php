@@ -1,12 +1,12 @@
 <div class="container">
-    <? if (isset($message['type'])) {?>
+    <? if (is_array($message) and array_key_exists('type', $message)) {?>
         <div class="alert alert-<?=$message['type']?>"> <a class="close" data-dismiss="alert" href="#">&times;</a> <? if ($message['type']=='success') {?><span class="glyphicon glyphicon-ok"></span><?}?> <?=$message['text']?></div>
     <? } ?>
 <h1 class="page-header">Схема этажа, квартирография</h1>
 
 	<ol class="breadcrumb">
-		<li><a href="/admin/">Брусничное, корпус 1</a></li>
-		<li>Этаж 1</li>
+		<li><a href="/admin/blocks#block-<?=$block->id?>"><?=$object->title_object?>, <?=$block->numb_block?></a></li>
+		<li>Этаж <?=$floor->numb_floor?></li>
 	</ol>
 
 
@@ -72,7 +72,8 @@ if (empty($floor->plan)){
         Отредактируйте и сохраните отметку квартиры
         <form action="/admin/floor/markflat" name="checkfloor-form" method="post" class="form-inline" style="margin-top: 20px">
             <div class="form-group">
-                <input type="text" name="numb_flat" id="check_numb_flat" class="form-control" id="exampleInputEmail1" value="" placeholder="Введите номер квартиры" >
+                <input type="text" name="numb_flat" id="check_numb_flat" class="form-control"  value="" placeholder="Введите номер квартиры" >
+                <input type="hidden" name="curr_numb" id="curr_numb">
                 <input type="hidden" name="floor_id" value="<?=$floor->id?>">
                 <div  class="hidden">
                     <textarea  rows=3  name="coords"  class="canvas-area" placeholder="Shape Coordinates" data-image-id="#" data-image-url="<?=$floor->plan?>"></textarea>
@@ -94,7 +95,7 @@ if (empty($floor->plan)){
 
     <map name="nav">
         <? if (!empty($checked_flats)) foreach ($checked_flats as $flat) {?>
-        <area id="area-<?=$flat['id']?>" data-toggle="tooltip" data-placement="top" shape="poly" coords="<?=$flat['coords']?>" title="<?=$flat['numb_flat']?>"  data-maphilight='{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}'>
+        <area id="area-<?=$flat['id']?>"  shape="poly" coords="<?=$flat['coords']?>" title="<?=$flat['numb_flat']?>"  data-maphilight='{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}'>
         <?}?>
 
     </map>

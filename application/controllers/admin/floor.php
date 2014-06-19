@@ -6,6 +6,8 @@ class Floor extends CI_Controller {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->model('floors_model');
+        $this->load->model('blocks_model');
+        $this->load->model('objects_model');
         $this->load->library('form_validation');
     }
 
@@ -13,7 +15,9 @@ class Floor extends CI_Controller {
         if(!$this->ion_auth->logged_in()) {
             redirect('admin', 'refresh');
         }
-
+        $data['main_menu'] = 'floor';
+        $data['menu'] = array();
+        $data['usermenu'] = array();
     }
 
     public function addFloor()
@@ -94,7 +98,10 @@ class Floor extends CI_Controller {
         $data['usermenu'] = array();
         $data['type'] = '';
         $data['search'] = '';
+        $data['id'] = $id;
         $data['floor'] = $this->floors_model->getFloor($id);
+        $data['block'] = $this->blocks_model->getBlock($data['floor']->block_id);
+        $data['object'] = $this->objects_model->getObject($data['block']->object_id);
         $data['checked_flats'] = $this->floors_model->getMarkedFlats($id);
         $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
         if (!empty($_POST['upload-plan']) && !empty($_FILES))
@@ -197,11 +204,18 @@ class Floor extends CI_Controller {
                     'numb_flat' => $this->input->post('numb_flat'),
                     'floor_id' => $this->input->post('floor_id')
                 );
+
                 $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
                 if (empty($mark))
                     $res = $this->floors_model->markFlat($data);
                 else
-                    $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                {
+                    if ($mark[0]['numb_flat']==$_POST['curr_numb'])
+                        $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                    else
+                        $res = false;
+                }
+
                 if ($res)
                 {
                     $this->session->set_flashdata('message',  array(

@@ -1,111 +1,108 @@
 <div class="container">
-    
-    <h1 class="page-header">Квартиры<small> / Квартира 22</small></h1>
-    
-    
+    <? if (isset($message['type'])) {?>
+        <div class="alert alert-<?=$message['type']?>"> <a class="close" data-dismiss="alert" href="#">&times;</a> <? if ($message['type']=='success') {?><span class="glyphicon glyphicon-ok"></span><?}?> <?=$message['text']?></div>
+    <? } ?>
+    <h1 class="page-header">Квартиры<small> / Квартира <?=$flat['numb_flat']?></small></h1>
 	<ol class="breadcrumb">
-		<li><a href="/admin/">Брусничное, корпус 1</a></li>
-		<li><a href="/admin/">Квартиры</a></li>
-		<li>Квартира 22</li>
+		<li><a href="/admin/blocks#block-<?=$block->id?>"><?=$object->title_object?>, <?=$block->numb_block?></a></li>
+		<li><a href="/admin/flats?block_id=<?=$flat['block_id'];?>">Квартиры</a></li>
+		<li>Квартира <?=$flat['numb_flat'];?></li>
 	</ol>
-    
-    
-    <?php echo form_open("", 'name="edit" method="POST"');?>
-
-
-	
+    <?php echo form_open_multipart("", 'name="edit" method="POST"');?>
 	<div class="row">
 		<div class="col-md-4">
 
 			<div class="form-group">
-				<label for="xxx" class="control-label">Номер</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="numb_flat" class="control-label">Номер</label>
+				<input type="text" class="form-control" id="numb_flat" name="numb_flat" value="<?=$flat['numb_flat']?>" placeholder="" >
+			</div>
+            <div class="form-group">
+				<label for="full_area" class="control-label">Общая площадь</label>
+				<input type="text" class="form-control" id="full_area" name="full_area" value="<?=$flat['full_area']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Общая площадь</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="living_area" class="control-label">Жилая площадь</label>
+				<input type="text" class="form-control" id="living_area" name="living_area" value="<?=$flat['living_area']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Жилая площадь</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="kitchen_area" class="control-label">Площадь кухни</label>
+				<input type="text" class="form-control" id="kitchen_area" name="kitchen_area" value="<?=$flat['kitchen_area']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Площадь кухни</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="floor" class="control-label">Этаж</label>
+				<input type="text" class="form-control" id="floor" name="floor" value="<?=$flat['floor']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Этаж</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
-			</div>
-			<div class="form-group">
-				<label for="xxx" class="control-label">Количество комнат</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="count_room" class="control-label">Количество комнат</label>
+				<input type="text" class="form-control" id="count_room" name="count_room" value="<?=$flat['count_room']?>" placeholder="" >
 			</div>
 			<div class="form-group">
 				<label for="xxx" class="control-label">Статус</label>
 				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Основная цена</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="price" class="control-label">Основная цена</label>
+				<input type="text" class="form-control" id="price" name="price" value="<?=$flat['price']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Акционная цена</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="sale_price" class="control-label">Акционная цена</label>
+				<input type="text" class="form-control" id="sale_price" name="sale_price" value="<?=$flat['sale_price']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Тип санузла</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="wc_type" class="control-label">Тип санузла</label>
+				<input type="text" class="form-control" id="wc_type" name="wc_type" value="<?=$flat['wc_type']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Балкон</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="balcon" class="control-label">Балкон</label>
+				<input type="text" class="form-control" id="balcon" name="balcon" value="<?=$flat['balcon']?>" placeholder="" >
 			</div>
 			<div class="form-group">
-				<label for="xxx" class="control-label">Лоджия</label>
-				<input type="text" class="form-control" id="xxx" name="xxx" value="" placeholder="" >
+				<label for="loggia" class="control-label">Лоджия</label>
+				<input type="text" class="form-control" id="loggia" name="loggia" value="<?=$flat['loggia']?>" placeholder="" >
 			</div>
-	       
-			
-		
+
+
+
 		</div>
 		<div class="col-md-8">
-			
+
 			<div class="form-group">
-				<label for="xxx" class="control-label">Статус</label>
-				<select class="form-control" name="typeSelect" id="typeSelect">
-					<option value="0">Доступно</option>
-					<option value="1">Резерв</option>
+				<label for="status" class="control-label">Статус</label>
+				<select class="form-control" name="status" id="typeSelect">
+					<option value="1" <?=($flat['status']=='1')?'selected':''?>>Доступно</option>
+					<option value="2" <?=($flat['status']=='2')?'selected':''?>>Резерв</option>
 				</select>
 			</div>
-			
+
 			<div class="form-group">
-				<label for="xxx" class="control-label">Картинка малая</label>
+				<label for="thumb" class="control-label">Картинка малая</label>
 				<div class="row">
 					<div class="col-md-4">
-						
-						<div><img src="/public/layout/flats/22-a.png" class="img-thumbnail" alt=""></div>
-						<div class="checkbox"><label><input type="checkbox" id="enabled"  value="1" name="enabled" checked > Удалить</label></div>
+                    <? if ($thumb) {?>
+						<div><img src="<?=$thumb?>" class="img-thumbnail" alt=""></div>
+						<div class="checkbox"><label><input type="checkbox" id="del_thumb"  value="1" name="del_thumb" >Удалить</label></div>
+                    <? } ?>
 					</div>
 					<div class="col-md-8">
 						<div class="form-group">
-							<input type="file" id="exampleInputFile">
+							<input type="file" id="thumb" name="thumb">
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
-				<label for="xxx" class="control-label">Картинка большая</label>
+				<label for="img" class="control-label">Картинка большая</label>
 				<div class="row">
 					<div class="col-md-6">
-						
-						<div><img src="/public/layout/flats/22-b.png" class="img-thumbnail" alt=""></div>
-						<div class="checkbox"><label><input type="checkbox" id="enabled"  value="1" name="enabled" checked > Удалить</label></div>
-					</div>
+                        <? if ($img) {?>
+						<div><img src="<?=$img?>" class="img-thumbnail" alt=""></div>
+						<div class="checkbox"><label><input type="checkbox" id="del_img"  value="1" name="del_img">Удалить</label></div>
+                        <? } ?>
+                    </div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="file" id="exampleInputFile">
+							<input type="file" id="img" name="img" >
 						</div>
 					</div>
 				</div>

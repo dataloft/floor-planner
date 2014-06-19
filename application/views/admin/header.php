@@ -38,7 +38,7 @@
 		<?if(isset($menu)):?>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/admin/">Управление планировками</a></li>
+				<li><a href="/admin/blocks">Управление планировками</a></li>
 			</ul>
 			<!--ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-trash"></span> Корзина</a></li>
@@ -47,16 +47,3 @@
 		<?endif?>
 	</div>
 </div>
-<script>
-var url = document.location.href;
-$.each($(".menu a"),function(){
-if(this.href == url){
-$(this).addClass('active-menu');
-};
-});
-
-$(".box-category a").each(function(e){
-
-
-});
-</script>

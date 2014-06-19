@@ -12,7 +12,12 @@ class Blocks_model extends CI_Model {
         $q =  $this->db->get('_blocks');
         return  $q->result_array();
     }
-
+    public function getBlock($id) {
+        $this->db->select('*');
+        $this->db->where('id',$id);
+        $q =  $this->db->get('_blocks');
+        return  $q->row();
+    }
     public function addBlock ($data)
     {
         $this->db->insert('_blocks', $data);

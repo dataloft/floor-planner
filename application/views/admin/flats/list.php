@@ -3,11 +3,11 @@
 	<div class="alert alert-<?=$message['type']?>"> <a class="close" data-dismiss="alert" href="#">&times;</a> <? if ($message['type']=='success') {?><span class="glyphicon glyphicon-ok"></span><?}?> <?=$message['text']?></div>
 	<? } ?>
 	<h1 class="page-header">Квартиры</h1>
-	
-	<ol class="breadcrumb">
-		<li><a href="/admin/">Брусничное, корпус 1</a></li>
-		<li>Квартиры</li>
-	</ol>
+
+    <ol class="breadcrumb">
+        <li><a href="/admin/blocks#block-<?=$block->id?>"><?=$object->title_object?>, <?=$block->numb_block?></a></li>
+        <li>Квартиры</li>
+    </ol>
 	
 	
 	<div class="row">
@@ -18,7 +18,7 @@ if (!empty($flats_list))
 foreach ($flats_list as $flat)
 {
 ?>
-    			<li id="" class="list-group-item"><a href="/admin/flats/11"><?=$flat['numb_flat']?></a></li>
+    			<li id="" class="list-group-item"><a href="/admin/flats/<?=$flat['id']?>"><?=$flat['numb_flat']?></a></li>
 <?
 }
 ?>

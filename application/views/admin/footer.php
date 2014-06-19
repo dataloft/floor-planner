@@ -22,12 +22,28 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/themes/airyo/js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript" src="/themes/nsc/js/jquery.canvasAreaDraw.min.for.admin.js"></script>
+
 <script type="text/javascript" src="/themes/nsc/js/jquery.maphilight.js"></script>
 <script type="text/javascript">$(function() {
         $('.map').maphilight();
-    });</script>
+    });
+
+    var url = document.location.href;
+    $.each($(".nav li a"),function(){
+        var href = $(this).attr('href');
+        var pos = document.location.pathname.indexOf(href);
+        if( pos >= 0 && href != '/' || href == document.location.pathname ){
+            $(this).parent().addClass('active');
+        };
+    });
+
+    $(".box-category a").each(function(e){
+
+
+    });
+</script>
 </body>
 </html>

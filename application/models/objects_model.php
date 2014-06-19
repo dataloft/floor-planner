@@ -11,6 +11,12 @@ class Objects_model extends CI_Model {
         $q =  $this->db->get('_objects');
         return  $q->result_array();
 	}
+    public function getObject($id) {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        $q =  $this->db->get('_objects');
+        return  $q->row();
+	}
 }
 
 /* End of file page.php */

@@ -97,9 +97,13 @@
 
         e('#add-area').click(
             function () {
-
                 e('#save-block').removeClass('hidden');
-
+                e('#edit-canv').remove();
+                e('textarea').text('');
+                e('#check_numb_flat').val('');
+                var data = $('#star').data('maphilight') || {};
+                data.neverOn = !data.neverOn;
+                $('#star').data('maphilight', data);
                 e(document).ready(function(){ e(".canvas-area[data-image-url]").canvasAreaDraw();})
 
             }
@@ -116,6 +120,7 @@
 
                 e('textarea').text($(this).attr('coords'));
                 e('#check_numb_flat').val($(this).attr('title'));
+                e('#curr_numb').val($(this).attr('title'));
                 e(document).ready(function(){ e(".canvas-area[data-image-url]").canvasAreaDraw();});
                 e('#save-block').removeClass('hidden');
 
