@@ -53,9 +53,9 @@ class Flats_model extends CI_Model {
            return false;
     }
 
-    public function delete ($id)
+    public function deleteFlat ($id)
     {
-        if ($this->db->delete('_blocks', array('id' => $id)))
+        if ($this->db->delete('_flats', array('id' => $id)))
             //$return = $this->db->affected_rows() == 1;
             return true;
         else

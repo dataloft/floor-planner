@@ -18,7 +18,7 @@ if (!empty($flats_list))
 foreach ($flats_list as $flat)
 {
 ?>
-    			<li id="" class="list-group-item"><a href="/admin/flats/<?=$flat['id']?>"><?=$flat['numb_flat']?></a></li>
+    			<li id="" class="list-group-item"><a href="/admin/flats/<?=$flat['id']?>"><?=$flat['numb_flat']?></a><a class="pull-right" href="/admin/flats/deleteflat?id=<?=$flat['id']?>" >Удалить</a></li>
 <?
 }
 ?>

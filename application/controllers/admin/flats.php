@@ -42,6 +42,7 @@ class Flats extends CI_Controller {
 
     public function parseCSV($uploadFile, $block_id)
     {
+
         $pattern = array("numb_flat", "full_area", "living_area", "kitchen_area", "floor", "count_room", "status", "price", "sale_price", "wc_type", "balcon", "loggia");
         //Здесь работаем с содержимым переданного файла.
         $tmp_name = $uploadFile['tmp_name'];
@@ -52,6 +53,7 @@ class Flats extends CI_Controller {
                     'text' => 'Ошибка загрузки файла'
                 )
             );
+
         }
         else
         {
@@ -73,32 +75,36 @@ class Flats extends CI_Controller {
             {
                 $rowNumber = 0;
                 while ($row = fgetcsv($csvHandle, 100000, ';', '"')) {
+
                     $rowNumber += 1;
                     $row = array_map('trim', $row);
                     if ($rowNumber==1)
                     {
-                        $diff = array_diff_assoc($pattern,$row);
-                       if (empty($diff))
+                        //$diff = array_diff_assoc($pattern,$row);
+                       //if (empty($diff))
                            continue;
-                       else
-                       {
+                      /* else
+                       {print_r ($diff);
                            $this->session->set_flashdata('message',  array(
                                    'type' => 'danger',
-                                   'text' => 'Неврный формат данных'
+                                   'text' => 'Неверный формат данных'
                                )
                            );
                            return false;
-                       }
+                       }*/
 
                     }
+
                     $rowOrig = $row;
                     unset($row);
                     foreach ($rowOrig as $n => $val) {
                         $row[$pattern[$n]] = $val;
+
                     }
                     $row['block_id'] = $block_id;
                     unset($rowOrig);
                     $data[] = $row;
+                    echo $row;
                 }
                 return $data;
             }
@@ -130,7 +136,7 @@ class Flats extends CI_Controller {
             }
             else
             {
-                //$this->flats_model->addFlatBatch($old_flats);
+                if (!$this->session->flashdata('message'))
                 $this->session->set_flashdata('message',  array(
                         'type' => 'danger',
                         'text' => 'Файл пуст'
@@ -299,7 +305,7 @@ class Flats extends CI_Controller {
         if (!file_exists ($dir))
             mkdir($dir, 0777);
         $config['upload_path'] = $dir;
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'png';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
 
@@ -314,6 +320,28 @@ class Flats extends CI_Controller {
            return $this->upload->data();
 
         }
+    }
+
+    public function deleteFlat()
+    {
+        if (!empty($_GET['id'])){
+            $this->flats_model->deleteFlat($_GET['id']);
+            $output["success"] = "ok";
+            $this->session->set_flashdata('message',  array(
+                    'type' => 'success',
+                    'text' => 'Квартира удалена'
+                )
+            );
+        }
+        else
+        {
+            $this->session->set_flashdata('message',  array(
+                    'type' => 'danger',
+                    'text' => 'Произошла ошибка при удалении квартиры'
+                )
+            );
+        }
+        redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
    
 }
