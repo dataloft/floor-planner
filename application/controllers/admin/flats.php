@@ -299,7 +299,7 @@ class Flats extends CI_Controller {
         if (!file_exists ($dir))
             mkdir($dir, 0777);
         $config['upload_path'] = $dir;
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'png';
         $config['file_name'] = $name;
         $config['overwrite'] = true;
 
