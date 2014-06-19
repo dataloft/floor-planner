@@ -97,17 +97,16 @@
 
         e('#add-area').click(
             function () {
-                e('#save-block').removeClass('hidden');
-                e('#edit-canv').remove();
-                e('textarea').text('');
-                e('#check_numb_flat').val('');
-                var data = $('#star').data('maphilight') || {};
-                data.neverOn = !data.neverOn;
-                $('#star').data('maphilight', data);
-                e(document).ready(function(){ e(".canvas-area[data-image-url]").canvasAreaDraw();})
+                if (e('textarea').text()) {
+                    bootbox.confirm("Отменить текущее редактирование?", function(result) {
+                        if (result)  reset();
+                    });
+                }
+                else {
+                    reset();
+                }
 
             }
-
         );//
         e('area').click(
             function (ev) {
@@ -137,7 +136,30 @@
 
     function editarea (id)
     {
+        if ($('textarea').text()) {
+            bootbox.confirm("Отменить текущее редактирование?", function(result) {
+                if (result)  {
 
+                    $.each($("map area"),function(){
+                        $(this).data('maphilight',{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}).trigger('alwaysOn.maphilight');
+                    });
+                    //e('#save-block').removeClass('hidden');
+                    //ev.preventDefault();
+                    var data = $('#area-'+id).mouseout().data('maphilight') || {};
+                    data.alwaysOn = !data.alwaysOn;
+                    $('#area-'+id).data('maphilight', data).trigger('alwaysOn.maphilight');
+                    $('#check_numb_flat').val($('#area-'+id).attr('title'));
+                    $('textarea').text($('#area-'+id).attr('coords'));
+                    $(document).ready(function(){ $(".canvas-area[data-image-url]").canvasAreaDraw();});
+                    $('#save-block').removeClass('hidden');
+
+                }
+            });
+        }
+        else {
+            $.each($("map area"),function(){
+                $(this).data('maphilight',{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}).trigger('alwaysOn.maphilight');
+            });
             //e('#save-block').removeClass('hidden');
             //ev.preventDefault();
             var data = $('#area-'+id).mouseout().data('maphilight') || {};
@@ -147,7 +169,23 @@
             $('textarea').text($('#area-'+id).attr('coords'));
             $(document).ready(function(){ $(".canvas-area[data-image-url]").canvasAreaDraw();});
             $('#save-block').removeClass('hidden');
+        }
 
 
 
     }
+
+function reset () {
+
+    $.each($("map area"),function(){
+        $(this).data('maphilight',{"strokeColor":"808080","strokeWidth":1,"fillColor":"808080","fillOpacity":0.8,"alwaysOn":true}).trigger('alwaysOn.maphilight');
+    });
+    $('#save-block').removeClass('hidden');
+    $('#edit-canv').remove();
+    $('textarea').text('');
+    $('#check_numb_flat').val('');
+    var data = $('#star').data('maphilight') || {};
+    data.neverOn = !data.neverOn;
+    $('#star').data('maphilight', data);
+    $(document).ready(function(){ $(".canvas-area[data-image-url]").canvasAreaDraw();})
+}

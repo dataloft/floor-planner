@@ -38,7 +38,7 @@
 		<?if(isset($menu)):?>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/admin/blocks">Управление планировками</a></li>
+				<li><a href="/admin/">Управление планировками</a></li>
 			</ul>
 			<!--ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-trash"></span> Корзина</a></li>
