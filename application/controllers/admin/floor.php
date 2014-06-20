@@ -207,7 +207,12 @@ class Floor extends CI_Controller {
 
                 $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
                 if (empty($mark))
-                    $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                {
+                    if (!empty($_POST['curr_numb']))
+                        $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                    else
+                        $res = $this->floors_model->markFlat($data);
+                }
                 else
                 {
                     if ($mark[0]['numb_flat']==$_POST['curr_numb'])
