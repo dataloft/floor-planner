@@ -48,7 +48,7 @@ foreach ($objects_list as $object)
             foreach ($blocks_list as $block)
             {
                 ?>
-                <div  id="block-<?=$block['id']?>">
+                <div id="block-<?=$block['id']?>">
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="pull-left"><?=$block['numb_block']?></h3>

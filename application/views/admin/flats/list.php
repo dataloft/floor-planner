@@ -11,13 +11,16 @@
 	
 	
 	<div class="row">
-        <ul class="nav nav-pills pull-right">
-        <li>
-            <a class="dropdown-toggle" href="/admin/flats/add?block_id=<?=$_GET['block_id']?>" >
-                <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить квартиру
-            </a>
-        </li>
-        </ul>
+		<div class="col-md-12" style="margin-bottom: 20px;">
+	        <ul class="nav nav-pills pull-right">
+	        <li>
+	            <a class="dropdown-toggle" href="/admin/flats/add?block_id=<?=$_GET['block_id']?>" >
+	                <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить квартиру
+	            </a>
+	        </li>
+	        </ul>
+        </div>
+        
 		<div class="col-md-12">
 			<ul class="list-group" id="flat-list">
 <?
