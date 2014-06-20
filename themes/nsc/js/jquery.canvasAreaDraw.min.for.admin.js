@@ -97,7 +97,7 @@
 
         e('#add-area').click(
             function () {
-                if (e('textarea').text()) {
+                if (e('textarea').val()) {
                     bootbox.confirm("Отменить текущее редактирование?", function(result) {
                         if (result)  reset();
                     });
@@ -117,7 +117,7 @@
                 data.alwaysOn = !data.alwaysOn;
                 $(this).data('maphilight', data).trigger('alwaysOn.maphilight');
 
-                e('textarea').text($(this).attr('coords'));
+                e('textarea').val($(this).attr('coords'));
                 e('#check_numb_flat').val($(this).attr('title'));
                 e('#curr_numb').val($(this).attr('title'));
                 e(document).ready(function(){ e(".canvas-area[data-image-url]").canvasAreaDraw();});
@@ -136,7 +136,7 @@
 
     function editarea (id)
     {
-        if ($('textarea').text()) {
+        if ($('textarea').val()) {
             bootbox.confirm("Отменить текущее редактирование?", function(result) {
                 if (result)  {
 
@@ -149,7 +149,7 @@
                     data.alwaysOn = !data.alwaysOn;
                     $('#area-'+id).data('maphilight', data).trigger('alwaysOn.maphilight');
                     $('#check_numb_flat').val($('#area-'+id).attr('title'));
-                    $('textarea').text($('#area-'+id).attr('coords'));
+                    $('textarea').val($('#area-'+id).attr('coords'));
                     $(document).ready(function(){ $(".canvas-area[data-image-url]").canvasAreaDraw();});
                     $('#save-block').removeClass('hidden');
 
@@ -166,7 +166,7 @@
             data.alwaysOn = !data.alwaysOn;
             $('#area-'+id).data('maphilight', data).trigger('alwaysOn.maphilight');
             $('#check_numb_flat').val($('#area-'+id).attr('title'));
-            $('textarea').text($('#area-'+id).attr('coords'));
+            $('textarea').val($('#area-'+id).attr('coords'));
             $(document).ready(function(){ $(".canvas-area[data-image-url]").canvasAreaDraw();});
             $('#save-block').removeClass('hidden');
         }
@@ -182,7 +182,7 @@ function reset () {
     });
     $('#save-block').removeClass('hidden');
     $('#edit-canv').remove();
-    $('textarea').text('');
+    $('textarea').val('');
     $('#check_numb_flat').val('');
     var data = $('#star').data('maphilight') || {};
     data.neverOn = !data.neverOn;

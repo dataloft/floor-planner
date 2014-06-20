@@ -57,12 +57,16 @@ class Flats extends CI_Controller {
         }
         else
         {
+            setlocale(LC_ALL, 'ru_RU.UTF-8');
+            ini_set('auto_detect_line_endings',TRUE);
             //Считываем файл в строку
             $csvData = file_get_contents($tmp_name);
             $csvData = iconv('cp1251', 'utf-8', $csvData);
             $fname = tempnam($_SERVER['DOCUMENT_ROOT']."/tmp", "priceCsv");
             file_put_contents($fname, $csvData);
             $csvHandle = fopen($fname, 'r');
+
+
             if ($csvHandle === false) {
                 $this->session->set_flashdata('message',  array(
                         'type' => 'danger',
@@ -74,24 +78,25 @@ class Flats extends CI_Controller {
             else
             {
                 $rowNumber = 0;
-                while ($row = fgetcsv($csvHandle, 100000, ';', '"')) {
-
+                while ($row = fgetcsv($csvHandle, 100000, ';', '"'))
+                {
                     $rowNumber += 1;
                     $row = array_map('trim', $row);
                     if ($rowNumber==1)
                     {
-                        //$diff = array_diff_assoc($pattern,$row);
-                       //if (empty($diff))
+
+                        $diff = array_diff_assoc($pattern,$row);
+                       if (empty($diff))
                            continue;
-                      /* else
-                       {print_r ($diff);
+                      else
+                       {
                            $this->session->set_flashdata('message',  array(
                                    'type' => 'danger',
                                    'text' => 'Неверный формат данных'
                                )
                            );
                            return false;
-                       }*/
+                       }
 
                     }
 
@@ -104,7 +109,7 @@ class Flats extends CI_Controller {
                     $row['block_id'] = $block_id;
                     unset($rowOrig);
                     $data[] = $row;
-                    echo $row;
+
                 }
                 return $data;
             }
@@ -112,7 +117,7 @@ class Flats extends CI_Controller {
         return false;
     }
 
-    public function addFlat()
+    public function addFlatCsv()
     {
         if ( isset($_POST['upload'])) {
             $csv = $this->parseCSV($_FILES['csv-flat'],$_GET['block_id']);
@@ -297,6 +302,117 @@ class Flats extends CI_Controller {
 
         $this->load->view('admin/header', @$data);
         $this->load->view('admin/flats/edit', @$data);
+        $this->load->view('admin/footer', @$data);
+    }
+
+    public function addFlat() {
+
+        if(!$this->ion_auth->logged_in()) {
+            redirect('admin', 'refresh');
+        }
+        if (!isset($_GET['block_id']))
+        {
+            $this->session->set_flashdata('message',  array(
+                    'type' => 'danger',
+                    'text' => 'Неизвестный объект'
+                )
+            );
+            redirect('admin/blocks', 'refresh');
+        }
+        $data['main_menu'] = 'floor';
+        $data['menu'] = array();
+        $data['usermenu'] = array();
+        $data['type'] = '';
+        $data['search'] = '';
+        $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
+        $this->form_validation->set_rules('numb_flat', '', 'required');
+        $data['flat']["block_id"] = $_GET['block_id'];
+        // Если передан Ид ищем содержание в БД
+            $data['block'] = $this->blocks_model->getBlock($_GET['block_id']);
+            $data['object'] = $this->objects_model->getObject($data['block']->object_id);
+            //$data['flat'] = $flat;
+
+            /*if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png'))
+                $data['thumb'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png';
+            else*/
+                $data['thumb'] = '';
+           /* if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png'))
+                $data['img'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png';
+            else*/
+                $data['img'] = '';
+            if (!empty($_POST))
+            {
+                /*if ($this->input->post('del_thumb'))
+                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
+                if ($this->input->post('del_img'))
+                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');*/
+
+                  $data['flat']["numb_flat"] = $this->input->post('numb_flat');
+                  $data['flat']["full_area"] = $this->input->post('full_area');
+                  $data['flat']["living_area"] = $this->input->post('living_area');
+                  $data['flat']["kitchen_area"] = $this->input->post('kitchen_area');
+                  $data['flat']["floor"] = $this->input->post('floor');
+                  $data['flat']["count_room"] = $this->input->post('count_room');
+                  $data['flat']["status"] = $this->input->post('status');
+                  $data['flat']["price"] = $this->input->post('price');
+                  $data['flat']["sale_price"] = $this->input->post('sale_price');
+                  $data['flat']["wc_type"] = $this->input->post('wc_type');
+                  $data['flat']["balcon"] = $this->input->post('balcon');
+                  $data['flat']["loggia"] = $this->input->post('loggia');
+
+
+                if ($this->form_validation->run() == true)
+                {
+                        $flat_num = $this->flats_model->getNumbFlat($this->input->post('numb_flat'),$_GET['block_id']);
+                        if (empty($flat_num))
+                            $result = $this->flats_model->addFlat($data['flat']);
+
+
+                    if (!empty($result))
+                    {
+                        $this->session->set_flashdata('message', array(
+                                'type' => 'success',
+                                'text' => 'Квартира добавлена'
+                            )
+                        );
+
+                        if (isset($_FILES['thumb']))
+                            $this->imgUpload("thumb",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'a');
+                        if (isset($_FILES['img']))
+                            $this->imgUpload("img",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'b');
+                        redirect('admin/flats?block_id='. $data['flat']["block_id"], 'refresh');
+                    }
+                    else
+                    {
+                        if (!empty($flat_num))
+                            $data['message'] = array(
+                                'type' => 'danger',
+                                'text' => 'Квартира с номером '.$this->input->post('numb_flat').' уже существует.'
+
+                            );
+                        else
+                        $data['message'] = array(
+                            'type' => 'danger',
+                            'text' => 'Произошла ошибка при обновлении записи.'
+
+                        );
+                    }
+                }
+                else
+                {
+                    $data['message'] =  array(
+                        'type' => 'danger',
+                        'text' => validation_errors()
+
+                    );
+
+                }
+
+            }
+
+
+        $this->load->view('admin/header', @$data);
+        $this->load->view('admin/flats/add', @$data);
         $this->load->view('admin/footer', @$data);
     }
 

@@ -11,6 +11,13 @@
 	
 	
 	<div class="row">
+        <ul class="nav nav-pills pull-right">
+        <li>
+            <a class="dropdown-toggle" href="/admin/flats/add?block_id=<?=$_GET['block_id']?>" >
+                <span class="glyphicon glyphicon-plus" style="color: #777"></span>&nbsp;&nbsp;Добавить квартиру
+            </a>
+        </li>
+        </ul>
 		<div class="col-md-12">
 			<ul class="list-group" id="flat-list">
 <?
@@ -27,7 +34,7 @@ foreach ($flats_list as $flat)
 	</div>
     <div class="row">
     	<div class="col-md-12" style="margin-top: 30px">
-	        <form action="/admin/flats/addflat?block_id=<?=$_GET['block_id']?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	        <form action="/admin/flats/addflatcsv?block_id=<?=$_GET['block_id']?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	        <div class="form-group">
 	        	<label for="csv-flat">Прокачка csv</label>
 	            <input type="file" name="csv-flat" size="20" />
