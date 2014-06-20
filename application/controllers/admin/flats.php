@@ -37,7 +37,7 @@ class Flats extends CI_Controller {
         $this->load->view('admin/header', $data);
         $this->load->view('admin/flats/list', $data);
         $this->load->view('admin/footer', $data);
-        
+
     }
 
     public function parseCSV($uploadFile, $block_id)
@@ -86,17 +86,17 @@ class Flats extends CI_Controller {
                     {
 
                         $diff = array_diff_assoc($pattern,$row);
-                       if (empty($diff))
-                           continue;
-                      else
-                       {
-                           $this->session->set_flashdata('message',  array(
-                                   'type' => 'danger',
-                                   'text' => 'Неверный формат данных'
-                               )
-                           );
-                           return false;
-                       }
+                        if (empty($diff))
+                            continue;
+                        else
+                        {
+                            $this->session->set_flashdata('message',  array(
+                                    'type' => 'danger',
+                                    'text' => 'Неверный формат данных'
+                                )
+                            );
+                            return false;
+                        }
 
                     }
 
@@ -142,11 +142,11 @@ class Flats extends CI_Controller {
             else
             {
                 if (!$this->session->flashdata('message'))
-                $this->session->set_flashdata('message',  array(
-                        'type' => 'danger',
-                        'text' => 'Файл пуст'
-                    )
-                );
+                    $this->session->set_flashdata('message',  array(
+                            'type' => 'danger',
+                            'text' => 'Файл пуст'
+                        )
+                    );
             }
         }
         redirect('admin/flats?block_id='.$_GET['block_id'], 'refresh');
@@ -187,11 +187,11 @@ class Flats extends CI_Controller {
 
 
     public function edit($id) {
-        
+
         if(!$this->ion_auth->logged_in()) {
             redirect('admin', 'refresh');
         }
-        
+
         $data['main_menu'] = 'floor';
         $data['menu'] = array();
         $data['usermenu'] = array();
@@ -222,23 +222,30 @@ class Flats extends CI_Controller {
             if (!empty($_POST))
             {
                 if ($this->input->post('del_thumb'))
-                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
-                if ($this->input->post('del_img'))
-                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');
+                {
+                    @unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
+                    @rmdir($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/');
+                }
 
-                  $data['flat']["numb_flat"] = $this->input->post('numb_flat');
-                  $data['flat']["full_area"] = $this->input->post('full_area');
-                  $data['flat']["living_area"] = $this->input->post('living_area');
-                  $data['flat']["kitchen_area"] = $this->input->post('kitchen_area');
-                  $data['flat']["floor"] = $this->input->post('floor');
-                  $data['flat']["count_room"] = $this->input->post('count_room');
-                  $data['flat']["status"] = $this->input->post('status');
-                  $data['flat']["price"] = $this->input->post('price');
-                  $data['flat']["sale_price"] = $this->input->post('sale_price');
-                  $data['flat']["wc_type"] = $this->input->post('wc_type');
-                  $data['flat']["balcon"] = $this->input->post('balcon');
-                  $data['flat']["loggia"] = $this->input->post('loggia');
-               
+                if ($this->input->post('del_img'))
+                {
+                    @unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');
+                    @rmdir($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/');
+                }
+
+                $data['flat']["numb_flat"] = $this->input->post('numb_flat');
+                $data['flat']["full_area"] = $this->input->post('full_area');
+                $data['flat']["living_area"] = $this->input->post('living_area');
+                $data['flat']["kitchen_area"] = $this->input->post('kitchen_area');
+                $data['flat']["floor"] = $this->input->post('floor');
+                $data['flat']["count_room"] = $this->input->post('count_room');
+                $data['flat']["status"] = $this->input->post('status');
+                $data['flat']["price"] = $this->input->post('price');
+                $data['flat']["sale_price"] = $this->input->post('sale_price');
+                $data['flat']["wc_type"] = $this->input->post('wc_type');
+                $data['flat']["balcon"] = $this->input->post('balcon');
+                $data['flat']["loggia"] = $this->input->post('loggia');
+
                 if ($this->form_validation->run() == true)
                 {
                     if ($this->input->post('numb_flat') != $flat['numb_flat'])
@@ -280,11 +287,11 @@ class Flats extends CI_Controller {
 
                             );
                         else
-                        $data['message'] = array(
-                            'type' => 'danger',
-                            'text' => 'Произошла ошибка при обновлении записи.'
+                            $data['message'] = array(
+                                'type' => 'danger',
+                                'text' => 'Произошла ошибка при обновлении записи.'
 
-                        );
+                            );
                     }
                 }
                 else
@@ -328,87 +335,87 @@ class Flats extends CI_Controller {
         $this->form_validation->set_rules('numb_flat', '', 'required');
         $data['flat']["block_id"] = $_GET['block_id'];
         // Если передан Ид ищем содержание в БД
-            $data['block'] = $this->blocks_model->getBlock($_GET['block_id']);
-            $data['object'] = $this->objects_model->getObject($data['block']->object_id);
-            //$data['flat'] = $flat;
+        $data['block'] = $this->blocks_model->getBlock($_GET['block_id']);
+        $data['object'] = $this->objects_model->getObject($data['block']->object_id);
+        //$data['flat'] = $flat;
 
-            /*if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png'))
-                $data['thumb'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png';
-            else*/
-                $data['thumb'] = '';
-           /* if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png'))
-                $data['img'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png';
-            else*/
-                $data['img'] = '';
-            if (!empty($_POST))
+        /*if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png'))
+            $data['thumb'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png';
+        else*/
+        $data['thumb'] = '';
+        /* if (file_exists ($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png'))
+             $data['img'] = '/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png';
+         else*/
+        $data['img'] = '';
+        if (!empty($_POST))
+        {
+            /*if ($this->input->post('del_thumb'))
+                unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
+            if ($this->input->post('del_img'))
+                unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');*/
+
+            $data['flat']["numb_flat"] = $this->input->post('numb_flat');
+            $data['flat']["full_area"] = $this->input->post('full_area');
+            $data['flat']["living_area"] = $this->input->post('living_area');
+            $data['flat']["kitchen_area"] = $this->input->post('kitchen_area');
+            $data['flat']["floor"] = $this->input->post('floor');
+            $data['flat']["count_room"] = $this->input->post('count_room');
+            $data['flat']["status"] = $this->input->post('status');
+            $data['flat']["price"] = $this->input->post('price');
+            $data['flat']["sale_price"] = $this->input->post('sale_price');
+            $data['flat']["wc_type"] = $this->input->post('wc_type');
+            $data['flat']["balcon"] = $this->input->post('balcon');
+            $data['flat']["loggia"] = $this->input->post('loggia');
+
+
+            if ($this->form_validation->run() == true)
             {
-                /*if ($this->input->post('del_thumb'))
-                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
-                if ($this->input->post('del_img'))
-                    unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');*/
-
-                  $data['flat']["numb_flat"] = $this->input->post('numb_flat');
-                  $data['flat']["full_area"] = $this->input->post('full_area');
-                  $data['flat']["living_area"] = $this->input->post('living_area');
-                  $data['flat']["kitchen_area"] = $this->input->post('kitchen_area');
-                  $data['flat']["floor"] = $this->input->post('floor');
-                  $data['flat']["count_room"] = $this->input->post('count_room');
-                  $data['flat']["status"] = $this->input->post('status');
-                  $data['flat']["price"] = $this->input->post('price');
-                  $data['flat']["sale_price"] = $this->input->post('sale_price');
-                  $data['flat']["wc_type"] = $this->input->post('wc_type');
-                  $data['flat']["balcon"] = $this->input->post('balcon');
-                  $data['flat']["loggia"] = $this->input->post('loggia');
+                $flat_num = $this->flats_model->getNumbFlat($this->input->post('numb_flat'),$_GET['block_id']);
+                if (empty($flat_num))
+                    $result = $this->flats_model->addFlat($data['flat']);
 
 
-                if ($this->form_validation->run() == true)
+                if (!empty($result))
                 {
-                        $flat_num = $this->flats_model->getNumbFlat($this->input->post('numb_flat'),$_GET['block_id']);
-                        if (empty($flat_num))
-                            $result = $this->flats_model->addFlat($data['flat']);
+                    $this->session->set_flashdata('message', array(
+                            'type' => 'success',
+                            'text' => 'Квартира добавлена'
+                        )
+                    );
 
+                    if (isset($_FILES['thumb']))
+                        $this->imgUpload("thumb",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'a');
+                    if (isset($_FILES['img']))
+                        $this->imgUpload("img",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'b');
+                    redirect('admin/flats?block_id='. $data['flat']["block_id"], 'refresh');
+                }
+                else
+                {
+                    if (!empty($flat_num))
+                        $data['message'] = array(
+                            'type' => 'danger',
+                            'text' => 'Квартира с номером '.$this->input->post('numb_flat').' уже существует.'
 
-                    if (!empty($result))
-                    {
-                        $this->session->set_flashdata('message', array(
-                                'type' => 'success',
-                                'text' => 'Квартира добавлена'
-                            )
                         );
-
-                        if (isset($_FILES['thumb']))
-                            $this->imgUpload("thumb",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'a');
-                        if (isset($_FILES['img']))
-                            $this->imgUpload("img",$_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$_GET['block_id'].'/',$this->input->post('numb_flat').'b');
-                        redirect('admin/flats?block_id='. $data['flat']["block_id"], 'refresh');
-                    }
                     else
-                    {
-                        if (!empty($flat_num))
-                            $data['message'] = array(
-                                'type' => 'danger',
-                                'text' => 'Квартира с номером '.$this->input->post('numb_flat').' уже существует.'
-
-                            );
-                        else
                         $data['message'] = array(
                             'type' => 'danger',
                             'text' => 'Произошла ошибка при обновлении записи.'
 
                         );
-                    }
                 }
-                else
-                {
-                    $data['message'] =  array(
-                        'type' => 'danger',
-                        'text' => validation_errors()
+            }
+            else
+            {
+                $data['message'] =  array(
+                    'type' => 'danger',
+                    'text' => validation_errors()
 
-                    );
-
-                }
+                );
 
             }
+
+        }
 
 
         $this->load->view('admin/header', @$data);
@@ -433,7 +440,7 @@ class Flats extends CI_Controller {
         }
         else
         {
-           return $this->upload->data();
+            return $this->upload->data();
 
         }
     }
@@ -441,13 +448,21 @@ class Flats extends CI_Controller {
     public function deleteFlat()
     {
         if (!empty($_GET['id'])){
-            $this->flats_model->deleteFlat($_GET['id']);
-            $output["success"] = "ok";
-            $this->session->set_flashdata('message',  array(
-                    'type' => 'success',
-                    'text' => 'Квартира удалена'
-                )
-            );
+            $flat = $this->flats_model->getFlatToId($_GET['id']);
+            if (!empty($flat))
+            {
+                $this->flats_model->deleteFlat($_GET['id']);
+                @unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'a.png');
+                @unlink($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/'.$flat['numb_flat'].'b.png');
+                @rmdir($_SERVER['DOCUMENT_ROOT'].'/public/layout/flats/'.$flat['block_id'].'/');
+                $output["success"] = "ok";
+                $this->session->set_flashdata('message',  array(
+                        'type' => 'success',
+                        'text' => 'Квартира удалена'
+                    )
+                );
+            }
+
         }
         else
         {
@@ -459,5 +474,5 @@ class Flats extends CI_Controller {
         }
         redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
-   
+
 }

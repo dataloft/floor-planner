@@ -140,7 +140,7 @@ class Floor extends CI_Controller {
             redirect('admin/blocks', 'refresh');
         }
 
-        
+
         $this->load->view('admin/header', $data);
         $this->load->view('admin/layout/floor', $data);
         $this->load->view('admin/footer', $data);
@@ -194,43 +194,43 @@ class Floor extends CI_Controller {
     public function markFlat()
     {
 
-            $this->form_validation->set_rules('coords', '', 'required');
-            $this->form_validation->set_rules('floor_id', '', 'required');
-            $this->form_validation->set_rules('numb_flat', '', 'required');
-            if ($this->form_validation->run() == true)
-            {
-                $data = array(
-                    'coords' => $this->input->post('coords'),
-                    'numb_flat' => $this->input->post('numb_flat'),
-                    'floor_id' => $this->input->post('floor_id')
-                );
+        $this->form_validation->set_rules('coords', '', 'required');
+        $this->form_validation->set_rules('floor_id', '', 'required');
+        $this->form_validation->set_rules('numb_flat', '', 'required');
+        if ($this->form_validation->run() == true)
+        {
+            $data = array(
+                'coords' => $this->input->post('coords'),
+                'numb_flat' => $this->input->post('numb_flat'),
+                'floor_id' => $this->input->post('floor_id')
+            );
 
-                $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
-                if (empty($mark))
+            $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
+            if (empty($mark))
+                $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+            else
+            {
+                if ($mark[0]['numb_flat']==$_POST['curr_numb'])
                     $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
                 else
-                {
-                    if ($mark[0]['numb_flat']==$_POST['curr_numb'])
-                        $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
-                    else
-                        $res = false;
-                }
+                    $res = false;
+            }
 
-                if ($res)
-                {
-                    $this->session->set_flashdata('message',  array(
-                            'type' => 'success',
-                            'text' => 'Квартира отмечена'
-                        )
-                    );
-                }
-                else
-                    $this->session->set_flashdata('message',  array(
-                            'type' => 'danger',
-                            'text' => 'Ошибка записи'
-                        )
-                    );
-            } else $this->session->set_flashdata('message',  array(
+            if ($res)
+            {
+                $this->session->set_flashdata('message',  array(
+                        'type' => 'success',
+                        'text' => 'Квартира отмечена'
+                    )
+                );
+            }
+            else
+                $this->session->set_flashdata('message',  array(
+                        'type' => 'danger',
+                        'text' => 'Ошибка записи'
+                    )
+                );
+        } else $this->session->set_flashdata('message',  array(
                 'type' => 'danger',
                 'text' => 'Заполнены не все поля'
             )
@@ -248,7 +248,9 @@ class Floor extends CI_Controller {
         if (!empty($floor_id) and $this->floors_model->update('', $floor_id))
         {
             if (!empty($_POST['plan']))
-                unlink($_SERVER['DOCUMENT_ROOT'].$_POST['plan']);
+            {
+                @unlink($_SERVER['DOCUMENT_ROOT'].$_POST['plan']);
+            }
 
             $output["success"] = "ok";
             $this->session->set_flashdata('message',  array(
@@ -292,5 +294,5 @@ class Floor extends CI_Controller {
         }
         redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
-   
+
 }
