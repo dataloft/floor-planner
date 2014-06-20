@@ -56,10 +56,11 @@ class Floors_model extends CI_Model {
             return false;
     }
 
-    public function updateMarkFlat ($data, $id)
+    public function updateMarkFlat ($data, $floor, $numb)
     {
 
-        $this->db->where('id', $id);
+        $this->db->where('floor_id', $floor);
+        $this->db->where('numb_flat', $numb);
         if ($this->db->update('checked_flats',$data))
             return true;
         else

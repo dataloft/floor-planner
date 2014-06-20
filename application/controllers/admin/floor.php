@@ -193,28 +193,32 @@ class Floor extends CI_Controller {
 
     public function markFlat()
     {
-
-        $this->form_validation->set_rules('coords', '', 'required');
-        $this->form_validation->set_rules('floor_id', '', 'required');
-        $this->form_validation->set_rules('numb_flat', '', 'required');
-        if ($this->form_validation->run() == true)
-        {
-            $data = array(
-                'coords' => $this->input->post('coords'),
-                'numb_flat' => $this->input->post('numb_flat'),
-                'floor_id' => $this->input->post('floor_id')
-            );
-
-            $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
-            if (empty($mark))
-                $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
-            else
+            $this->form_validation->set_rules('coords', '', 'required');
+            $this->form_validation->set_rules('floor_id', '', 'required|is_natural_no_zero');
+            $this->form_validation->set_rules('numb_flat', '', 'required|is_natural_no_zero');
+            if ($this->form_validation->run() == true)
             {
-                if ($mark[0]['numb_flat']==$_POST['curr_numb'])
-                    $res = $this->floors_model->updateMarkFlat($data, $mark[0]['id']);
+                $data = array(
+                    'coords' => $this->input->post('coords'),
+                    'numb_flat' => $this->input->post('numb_flat'),
+                    'floor_id' => $this->input->post('floor_id')
+                );
+
+                $mark = $this->floors_model->getmarkedFlats($data['floor_id'],$data['numb_flat']);
+                if (empty($mark))
+                {
+                    if (!empty($_POST['curr_numb']))
+                        $res = $this->floors_model->updateMarkFlat($data, $data['floor_id'],$_POST['curr_numb']);
+                    else
+                        $res = $this->floors_model->markFlat($data);
+                }
                 else
-                    $res = false;
-            }
+                {
+                    if ($mark[0]['numb_flat']==$_POST['curr_numb'])
+                        $res = $this->floors_model->updateMarkFlat($data, $data['floor_id'],$data['numb_flat']);
+                    else
+                        $res = false;
+                }
 
             if ($res)
             {
