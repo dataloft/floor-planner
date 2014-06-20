@@ -198,7 +198,7 @@ class Flats extends CI_Controller {
         $data['type'] = '';
         $data['search'] = '';
         $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
-        $this->form_validation->set_rules('numb_flat', '', 'required');
+        $this->form_validation->set_rules('numb_flat', '', 'required|is_natural_no_zero');
 
         // Если передан Ид ищем содержание в БД
         if (!empty($id))
@@ -325,7 +325,7 @@ class Flats extends CI_Controller {
         $data['type'] = '';
         $data['search'] = '';
         $data['message'] =  $this->session->flashdata('message')? $this->session->flashdata('message'):'';
-        $this->form_validation->set_rules('numb_flat', '', 'required');
+        $this->form_validation->set_rules('numb_flat', '', 'required|is_natural_no_zero');
         $data['flat']["block_id"] = $_GET['block_id'];
         // Если передан Ид ищем содержание в БД
             $data['block'] = $this->blocks_model->getBlock($_GET['block_id']);

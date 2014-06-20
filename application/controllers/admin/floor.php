@@ -195,8 +195,8 @@ class Floor extends CI_Controller {
     {
 
             $this->form_validation->set_rules('coords', '', 'required');
-            $this->form_validation->set_rules('floor_id', '', 'required');
-            $this->form_validation->set_rules('numb_flat', '', 'required');
+            $this->form_validation->set_rules('floor_id', '', 'required|is_natural_no_zero');
+            $this->form_validation->set_rules('numb_flat', '', 'required|is_natural_no_zero');
             if ($this->form_validation->run() == true)
             {
                 $data = array(
