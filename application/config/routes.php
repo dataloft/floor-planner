@@ -66,7 +66,8 @@ $route['admin/floor/delmarkedflat'] = 'admin/floor/delmarkedflat';
 $route['admin/flats'] = 'admin/flats/index';
 
 $route['admin/flats/index'] = 'admin/flats/index';
-$route['admin/flats/addflat'] = 'admin/flats/addflat';
+$route['admin/flats/add'] = 'admin/flats/addflat';
+$route['admin/flats/addflatcsv'] = 'admin/flats/addflatcsv';
 $route['admin/flats/(:num)'] = 'admin/flats/edit/$1';
 $route['admin/flats/deleteflat'] = 'admin/flats/deleteflat';
 
