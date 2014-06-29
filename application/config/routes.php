@@ -40,7 +40,7 @@
 
 $route['404_override'] = '';
 
-$route['default_controller'] = 'nsc/pages';
+$route['default_controller'] = 'nsc/xpages';
 
 // admin
 $route['admin'] = 'admin';
@@ -95,7 +95,7 @@ $route['admin/files/(:any)'] = 'admin/files/index/$1';
 //admin modules
 $route['admin/counters'] = 'admin/counters';
 
-$route['(:any)'] = 'nsc/pages/index/$1';
+$route['(:any)'] = 'nsc/xpages/index/$1';
 
 
 /* End of file routes.php */
