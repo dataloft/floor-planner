@@ -4,7 +4,6 @@
 			<div class="panel panel-default" style="margin-top: 65px;">
 				<div class="panel-heading">
 					<h3 class="panel-title">Вход в систему</h3>
-					<div style="float:right; font-size: 80%; position: relative; top:-15px"><a href="#">Забыли пароль?</a></div>
 				</div>
 				<div class="panel-body">
                    <?
@@ -25,11 +24,6 @@
 						</div>
 						<div class="input-group" style="margin-bottom: 25px"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 							<input class="form-control" placeholder="Пароль" name="password" type="password" value="" required>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input name="remember" type="checkbox" value="Remember Me">
-								Запомнить меня </label>
 						</div>
 						<button class="btn btn-lg btn-success btn-block" name="submit" type="submit" value="">Войти</button>
 					</fieldset>
