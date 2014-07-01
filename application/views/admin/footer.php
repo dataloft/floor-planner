@@ -24,10 +24,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="/themes/airyo/js/bootstrap.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="/themes/nsc/js/jquery.canvasAreaDraw.min.for.admin.js"></script>
-<script type="text/javascript" src="/themes/nsc/js/bootbox.min.js"></script>
+<script type="text/javascript" src="/themes/planner/js/jquery.canvasAreaDraw.min.for.admin.js"></script>
+<script type="text/javascript" src="/themes/planner/js/bootbox.min.js"></script>
 
-<script type="text/javascript" src="/themes/nsc/js/jquery.maphilight.js"></script>
+<script type="text/javascript" src="/themes/planner/js/jquery.maphilight.js"></script>
 <script type="text/javascript">$(function() {
         $('.map').maphilight();
     });

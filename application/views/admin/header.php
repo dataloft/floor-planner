@@ -11,7 +11,7 @@
 <link href="/themes/airyo/css/bootstrap-airyo.css" rel="stylesheet">
 
 
-<link type="text/css" rel="stylesheet" href="/themes/nsc/area_draw/css/styles.css">
+<link type="text/css" rel="stylesheet" href="/themes/planner/css/style.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

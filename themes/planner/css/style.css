@@ -1,0 +1,24 @@
+.preview {
+	padding: 2px;
+	margin-bottom: 16px;
+	display: inline-block;
+}
+
+.preview .inner {
+	position: relative;
+    z-index: 100;
+}
+.preview .plan {
+	position: relative;
+}
+
+.preview canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.preview .map {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
