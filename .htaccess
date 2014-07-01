@@ -1,0 +1,45 @@
+RewriteEngine On
+RewriteBase /
+
+### Стандартизация codeigniter URLs
+
+# "welcome" вы должны заменить на
+# имя вашего контроллера по умолчанию
+RewriteRule ^(pages(/index)?|index(\.php)?)/?$ / [L,R=301]
+RewriteRule ^(.*)/index/?$ $1 [L,R=301]
+
+# Удаление слешей в конце адреса
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ $1 [L,R=301]
+
+# Поддержка www
+# Если вы используете поддомены, вы можете добавить их
+# в список используя оператор "|" (OR)
+#RewriteCond %{HTTP_HOST} !^(www|subdomain) [NC]
+#RewriteRule ^(.*)$ http://www.domain.tld/$1 [L,R=301]
+
+# Поддержка БЕЗ www
+#RewriteCond %{HTTP_HOST} ^www [NC]
+#RewriteRule ^(.*)$ http://domain.tld/$1 [L,R=301]
+
+###
+
+# Запрет доступа к системной папке для пользователей.
+# Дополнительно, это позволит вам создать контроллер System.php,
+# ранее такой возможности не было.
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php/$1 [L]
+
+# Проверяем, если пользователь пытается получить доступ,
+# к несуществующему файлу, то перенаправляем его на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+
+<IfModule !mod_rewrite.c>
+
+ # Без mod_rewrite, перенаправляем 404 на главный контроллер
+ ErrorDocument 404 /index.php
+ </IfModule>
