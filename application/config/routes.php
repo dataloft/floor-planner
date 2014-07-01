@@ -40,7 +40,7 @@
 
 $route['404_override'] = '';
 
-$route['default_controller'] = 'nsc/xpages';
+$route['default_controller'] = 'admin/auth/login';
 
 // admin
 $route['admin'] = 'admin';
@@ -50,52 +50,22 @@ $route['admin/login'] = 'admin/auth/login';
 $route['admin/registration'] = 'admin/auth/create_user';
 $route['admin/logout'] = 'admin/auth/logout';
 
-//admin layout
+//admin floor planner
 $route['admin/blocks'] = 'admin/blocks/index';
 $route['admin/blocks/addblock'] = 'admin/blocks/addblock';
 $route['admin/blocks/delblock'] = 'admin/blocks/delblock';
-
 $route['admin/floor/addfloor'] = 'admin/floor/addfloor';
 $route['admin/floor/delfloor'] = 'admin/floor/delfloor';
 $route['admin/floor/(:num)'] = 'admin/floor/edit/$1';
 $route['admin/floor/delplan'] = 'admin/floor/delplan';
 $route['admin/floor/markflat'] = 'admin/floor/markflat';
 $route['admin/floor/delmarkedflat'] = 'admin/floor/delmarkedflat';
-
-
 $route['admin/flats'] = 'admin/flats/index';
-
 $route['admin/flats/index'] = 'admin/flats/index';
 $route['admin/flats/add'] = 'admin/flats/addflat';
 $route['admin/flats/addflatcsv'] = 'admin/flats/addflatcsv';
 $route['admin/flats/(:num)'] = 'admin/flats/edit/$1';
 $route['admin/flats/deleteflat'] = 'admin/flats/deleteflat';
-
-
-//admin content
-$route['admin/content'] = 'admin/content';
-$route['admin/content/add'] = 'admin/content/add';
-$route['admin/content/edit'] = 'admin/content/edit';
-$route['admin/content/edit/(:num)'] = 'admin/content/edit/$1';
-$route['admin/content/delete'] = 'admin/content/delete';
-
-//admin menu
-$route['admin/menu'] = 'admin/menu';
-$route['admin/menu/add'] = 'admin/menu/add';
-$route['admin/menu/add/(:num)'] = 'admin/menu/add/$1';
-$route['admin/menu/edit'] = 'admin/menu/edit';
-$route['admin/menu/edit/(:num)'] = 'admin/menu/edit/$1';
-$route['admin/menu/delete'] = 'admin/menu/delete';
-
-//admin file manager
-$route['admin/files'] = 'admin/files';
-$route['admin/files/dir'] = 'admin/files';
-$route['admin/files/(:any)'] = 'admin/files/index/$1';
-
-//admin modules
-$route['admin/counters'] = 'admin/counters';
-
-$route['(:any)'] = 'nsc/xpages/index/$1';
 
 
 /* End of file routes.php */
