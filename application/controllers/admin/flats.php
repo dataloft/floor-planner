@@ -128,7 +128,7 @@ class Flats extends CI_Controller {
 
                 foreach ($csv as $item)
                 {
-                    $flat = $this->flats_model->getNumbFlat($item['numb_flat']);
+                    $flat = $this->flats_model->getNumbFlat($item['numb_flat'],$_GET['block_id']);
 
                     if (empty($flat))
                         $res = $this->flats_model->addFlat($item);

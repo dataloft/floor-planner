@@ -9,6 +9,7 @@ class Flats_model extends CI_Model {
         $this->db->select('*');
         if (!empty($block_id))
             $this->db->where('block_id',$block_id);
+            $this->db->order_by("numb_flat", "ASC");
         $q =  $this->db->get('_flats');
         return  $q->result_array();
     }
